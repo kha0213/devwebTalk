@@ -39,4 +39,9 @@ public class HomeController {
     public String Login() {
         return "/user/login";
     }
+
+    @GetMapping(value = "/user/join")
+    public String userJoinView() {
+        return "/user/joinView";
+    }
 }
