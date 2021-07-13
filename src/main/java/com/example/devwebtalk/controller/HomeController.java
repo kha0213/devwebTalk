@@ -44,4 +44,10 @@ public class HomeController {
     public String userJoinView() {
         return "/user/joinView";
     }
+
+    @GetMapping(value = "/user/friendList")
+    public String userListView() {
+        return "/user/friendList";
+    }
+
 }
