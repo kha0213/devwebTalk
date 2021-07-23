@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="chat/base :: common_header(~{::title},~{::link})">
+  <title th:text="${room.name}">타이틀</title>
+
+  <!-- 이렇게 링크 추가하면 된다. -->
+  <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+</head>
+<body>
+<h1 th:text="${room.name}">채팅방 이름</h1>
+<div class="content">
+  <ul class="chat_box" id="chat_box">
+  </ul>
+  <input th:id="content" th:name="content"/>
+  <button class="send" onclick="sendMsg([[${user.id}]]);">전송</button>
+</div>
+<script th:inline="javascript">
+  $(function(){
+        connect(userEnter);
+  });
+
+  /**
+   * 채팅방 연결 성공 시 콜백
+   */
+  function userEnter() {
+    stompClient.send("/app/userEnter", {}, JSON.stringify({'userId': [[${user.id}]], 'content' : content, "roomId":[[${room.id}]]}));
+  }
+
+
+
+  function addChat(content) {
+    $('#chat_box').append('<li>'+content+'</li>');
+  }
+
+  /**
+   * 서버에서 보내오는걸 수신하는 Fun
+   */
+  function receiveMsg() {
+    stompClient.subscribe('/receiveMsg', function (data) {
+      addChat(JSON.parse(data.body).name + ":" + JSON.parse(data.body).content);
+    });
+  }
+  /**
+   * 서버에서 보내오는걸 수신하는 Fun
+   */
+  function userEnterMsg() {
+    stompClient.subscribe('/userEnter', function (data) {
+      addChat(JSON.parse(data.body).content);
+    });
+  }
+
+
+
+  function sendMsg(userId) {
+    let content = document.getElementById('content').value;
+    stompClient.send("/app/sendMsg", {}, JSON.stringify({'userId': userId, 'content' : content, "roomId":[[${room.id}]]}));
+  }
+</script>
+</body>
+</html>

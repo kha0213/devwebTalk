@@ -29,7 +29,7 @@ public class HomeController {
     @GetMapping(value = "/test")
     public String UserTest(Model model) {
         User user = new User("영롱");
-        final Long userAdd = userService.userAdd(user);
+        final Long userAdd = userService.save(user);
         logger.info("userAdd !! user : " + user);
         model.addAttribute("user", user);
         return "testUser";
