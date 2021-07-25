@@ -42,16 +42,6 @@ function connect(callback) {
     });
 }
 
-function connectSuccess() {
-    stompClient.subscribe('/topic/public', function (data) {
-        console.log('[subscribe] : ' + data);
-        // TODO 연결 후 콜백
-        showGreeting(JSON.parse(data.body).content);
-    });
-}
-
-
-
 
 
 
