@@ -23,7 +23,12 @@
    * 채팅방 연결 성공 시 콜백
    */
   function userEnter() {
-    stompClient.send("/app/userEnter", {}, JSON.stringify({'userId': [[${user.id}]], "roomId":[[${room.id}]]}));
+    console.log('userEnter!!');
+    // 메세지 구독 준비
+    receiveMsg();
+    // 유저 입장 메세지 구독 준비
+    userEnterMsg();
+    stompClient.send("/app/userEnter/[[${room.id}]]");
   }
 
 
@@ -38,7 +43,7 @@
    */
   function receiveMsg() {
     console.log("receiveMsg");
-    stompClient.subscribe('/app/topic/receiveMsg', function (data) {
+    stompClient.subscribe('/topic/receiveMsg', function (data) {
       console.log("/topic/receiveMsg [data] : " + data);
       addChat(JSON.parse(data.body).name + ":" + JSON.parse(data.body).content);
     });

@@ -1,12 +1,17 @@
 package com.example.devwebtalk.entity;
 
+import com.example.devwebtalk.entity.type.SocialType;
 import lombok.*;
 
 import javax.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import static javax.persistence.EnumType.*;
 import static javax.persistence.FetchType.*;
 import static javax.persistence.GenerationType.*;
 import static lombok.AccessLevel.*;
@@ -17,6 +22,7 @@ import static lombok.AccessLevel.*;
  * Date: 2021-07-10
  * Time: 오후 3:29
  */
+
 @ToString
 @NoArgsConstructor
 @Getter @Setter
@@ -27,12 +33,22 @@ import static lombok.AccessLevel.*;
         pkColumnValue = "USER_SEQ",
         allocationSize = 1) //TODO 운영엔 50으로 하자
 @Entity
-public class User {
+public class User extends BaseEntity {
     @Id @GeneratedValue(strategy = TABLE, generator = "USER_SEQ_GENERATOR")
     @Column(name = "USER_ID")
     private Long id;
 
+    private String phone;
+
+    private String email;
+
     private String name;
+
+    private LocalDateTime birthday;
+
+    @OneToMany(mappedBy = "user")
+    @MapKeyEnumerated(value = STRING)
+    private Map<SocialType, SocialLogin> socials = new HashMap<>();
 
     @ToString.Exclude
     @ManyToMany(mappedBy = "users")
@@ -42,6 +58,21 @@ public class User {
      * 생성자 함수
      */
     public User(String name) {
+        this(name, null);
+    }
+
+    public User(String name, LocalDateTime birthday) {
+        this(name, null, birthday);
+    }
+
+    public User(String name, String email, LocalDateTime localDateTime) {
+        this(name, null, email, localDateTime);
+    }
+
+    public User(String name, String phone, String email, LocalDateTime localDateTime) {
         this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.birthday = birthday;
     }
 }
