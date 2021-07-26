@@ -25,6 +25,8 @@ public abstract class BaseEntity {
     @LastModifiedBy
     @Column(columnDefinition = "varchar(255) default 'SYSTEM'")
     private String lastModifiedBy;
+    @Column(columnDefinition = "varchar(1) default 'Y'")
+    private char useYn;
     @Column(columnDefinition = "varchar(1) default 'N'")
     private char delYn;
 }
