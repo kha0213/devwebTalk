@@ -15,6 +15,10 @@ import java.util.Optional;
  */
 @Service
 public class UserService {
+    public static final String SUCCESS = "success";
+    public static final String NONUSER = "nonUser";
+    public static final String WRONG_PASSWORD = "wrongPassword";
+
     @Autowired
     UserRepository userRepository;
 
@@ -33,5 +37,12 @@ public class UserService {
     }
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
+    }
+
+    public String loginUser(String email, String pw) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if(user.isEmpty()) return NONUSER;
+        if(user.get().getPw().equals(pw)) return SUCCESS;
+        else return WRONG_PASSWORD;
     }
 }

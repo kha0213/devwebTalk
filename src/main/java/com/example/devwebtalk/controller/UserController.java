@@ -38,6 +38,11 @@ public class UserController {
             return "/user/socialJoinView";
         }
         return null;
-
     }
+
+    @RequestMapping(value = "/user/login")
+    public String loginView() {
+        return "/user/login";
+    }
+
 }

@@ -3,6 +3,8 @@ package com.example.devwebtalk.repository;
 import com.example.devwebtalk.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 /**
  * Created by Kim Young Long.
  * My Git Blog : https://kha0213.github.io/
@@ -10,4 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Time: 오후 3:30
  */
 public interface UserRepository extends JpaRepository<User, Long> {
+	Optional<User> findByEmail(String email);
 }

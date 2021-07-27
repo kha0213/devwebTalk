@@ -25,7 +25,7 @@ import static lombok.AccessLevel.*;
 
 @ToString
 @NoArgsConstructor
-@Getter @Setter
+@Getter
 @Table(name = "USERS")
 @TableGenerator(
         name = "USER_SEQ_GENERATOR",
@@ -45,6 +45,8 @@ public class User extends BaseEntity {
     private String name;
 
     private LocalDateTime birthday;
+
+    private String pw;
 
     @OneToMany(mappedBy = "user")
     @MapKeyEnumerated(value = STRING)
@@ -74,5 +76,13 @@ public class User extends BaseEntity {
         this.phone = phone;
         this.email = email;
         this.birthday = birthday;
+    }
+
+    public User(String name, String phone, String email, LocalDateTime birthday, String pw) {
+        this.phone = phone;
+        this.email = email;
+        this.name = name;
+        this.birthday = birthday;
+        this.pw = pw;
     }
 }
