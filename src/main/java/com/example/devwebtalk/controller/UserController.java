@@ -1,20 +1,19 @@
 package com.example.devwebtalk.controller;
 
+import com.example.devwebtalk.entity.User;
 import com.example.devwebtalk.entity.type.SocialType;
 import com.example.devwebtalk.service.UserService;
 import com.example.devwebtalk.util.SessionUtil;
-import com.example.devwebtalk.vo.LoginVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import java.util.Optional;
 
 /**
  * 2021-07-26
@@ -32,7 +31,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/user/socialJoin/{socialType}", method = GET)
+    @GetMapping(value = "/user/socialJoin/{socialType}")
     public String socialJoinView(Model model, HttpServletRequest req, @PathVariable SocialType socialType) {
         if (SessionUtil.isGuestUser(req)) { // 로그인 안 한 유저면
             return "/user/socialJoinView";
@@ -45,4 +44,26 @@ public class UserController {
         return "/user/login";
     }
 
+    @GetMapping(value = "/user/join")
+    public String userJoinView(Model model) {
+        model.addAttribute("user", new User());
+        return "/user/join";
+    }
+
+    @PostMapping(value = "/user/join")
+    public String userJoin(@ModelAttribute User user
+            , RedirectAttributes redirectAttributes) {
+        Long userId = userService.join(user);
+        redirectAttributes.addAttribute("userId", userId);
+        // TODO 회원 가입 후 메인으로 가는게 좋을 듯
+        return "redirect:/user/info";
+    }
+
+    @GetMapping(value = "/user/info")
+    public String userInfoView(@RequestParam("userId") Long userId
+                                ,Model model) {
+        Optional<User> user = userService.findById(userId);
+        model.addAttribute("user", user.orElseGet(User::new));
+        return "/user/info";
+    }
 }

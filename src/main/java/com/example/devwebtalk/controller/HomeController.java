@@ -29,7 +29,7 @@ public class HomeController {
     @GetMapping(value = "/test")
     public String UserTest(Model model) {
         User user = new User("영롱");
-        final Long userAdd = userService.save(user);
+        final Long userAdd = userService.join(user);
         logger.info("userAdd !! user : " + user);
         model.addAttribute("user", user);
         return "testUser";
@@ -40,10 +40,7 @@ public class HomeController {
         return "/user/login";
     }
 
-    @GetMapping(value = "/user/join")
-    public String userJoinView() {
-        return "/user/joinView";
-    }
+
 
     @GetMapping(value = "/user/friendList")
     public String userListView() {
