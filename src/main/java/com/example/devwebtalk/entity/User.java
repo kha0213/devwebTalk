@@ -12,9 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static javax.persistence.EnumType.*;
-import static javax.persistence.FetchType.*;
 import static javax.persistence.GenerationType.*;
-import static lombok.AccessLevel.*;
 
 /**
  * Created by Kim Young Long.
@@ -50,11 +48,16 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user")
     @MapKeyEnumerated(value = STRING)
+    @ToString.Exclude
     private Map<SocialType, SocialLogin> socials = new HashMap<>();
 
     @ToString.Exclude
     @ManyToMany(mappedBy = "users")
     private List<ChattingRoom> rooms = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private List<FriendsGroup> friendsGroups = new ArrayList<>();
 
     /**
      * 생성자 함수
