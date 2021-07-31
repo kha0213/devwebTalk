@@ -22,8 +22,9 @@ import static javax.persistence.GenerationType.*;
  */
 
 @ToString
+@EqualsAndHashCode
 @NoArgsConstructor
-@Getter
+@Getter @Setter
 @Table(name = "USERS")
 @TableGenerator(
         name = "USER_SEQ_GENERATOR",

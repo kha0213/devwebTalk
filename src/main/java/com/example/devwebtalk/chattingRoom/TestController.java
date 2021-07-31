@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
 /**
@@ -44,8 +43,8 @@ public class TestController {
     public void addTestDataAndModel(Model model) {
         User user1 = new User("영롱");
         User user2 = new User("다롱");
-        userService.save(user1);
-        userService.save(user2);
+        userService.join(user1);
+        userService.join(user2);
         ChattingRoom room1 = new ChattingRoom(Arrays.asList(user1, user2));
         roomService.save(room1);
         Chat chat1 = new Chat("하이 영롱", user2, room1);

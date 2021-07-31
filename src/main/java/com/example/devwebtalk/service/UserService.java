@@ -22,7 +22,12 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public Long save(User user) {
+    /**
+     * 회원가입
+     * @param user
+     * @return
+     */
+    public Long join(User user) {
         User u = userRepository.save(user);
         return u.getId();
     }
