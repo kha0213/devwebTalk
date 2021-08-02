@@ -24,14 +24,20 @@ class FriendServiceTest {
 	EntityManager em;
 
 	@Test
-	void createGroup() {
+	void createGroupTest() {
 		User user = new User("A");
 		em.persist(user);
-		friendService.createGroup(user,"testGroup");
+		friendService.createGroup(user,"testGroup1");
+		friendService.createGroup(user,"testGroup2");
+		friendService.createGroup(user,"testGroup3");
+		friendService.createGroup(user,"testGroup4");
 		List<FriendsGroup> allGroups = friendService.getAllGroups(user);
 
-		assertThat(allGroups.size()).isEqualTo(1);
-		assertThat(allGroups.get(0).getUser()).isEqualTo(user);
+		assertThat(allGroups.size()).isEqualTo(4);
+		FriendsGroup friendsGroup = allGroups.get(allGroups.size() - 1);
+		assertThat(friendsGroup.getGroupName()).isEqualTo("testGroup4");
+		User resultUser = friendsGroup.getUser();
+		assertThat(resultUser).isEqualTo(user);
 	}
 
 }

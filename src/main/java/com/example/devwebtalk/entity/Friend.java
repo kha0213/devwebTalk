@@ -23,13 +23,14 @@ public class Friend extends BaseEntity{
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID")
-	private User friend;
+	private User friendUser;
 
-	public Friend(FriendsGroup friendsGroup, User friend) {
+	public Friend(FriendsGroup friendsGroup, User friendUser) {
 		this.friendName = "";
 		this.friendsGroup = friendsGroup;
-		this.friend = friend;
-		this.friendName = friend.getName();
+		this.friendUser = friendUser;
+		this.friendName = friendUser.getName();
+		friendsGroup.getFriends().add(this);
 	}
 
 	public void changeName(String name) {

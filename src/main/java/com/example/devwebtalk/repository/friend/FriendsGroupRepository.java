@@ -1,4 +1,4 @@
-package com.example.devwebtalk.repository;
+package com.example.devwebtalk.repository.friend;
 
 import com.example.devwebtalk.entity.FriendsGroup;
 import com.example.devwebtalk.entity.User;

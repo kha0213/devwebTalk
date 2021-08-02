@@ -2,8 +2,8 @@ package com.example.devwebtalk.service;
 
 import com.example.devwebtalk.entity.FriendsGroup;
 import com.example.devwebtalk.entity.User;
-import com.example.devwebtalk.repository.FriendRepository;
-import com.example.devwebtalk.repository.FriendsGroupRepository;
+import com.example.devwebtalk.repository.friend.FriendRepository;
+import com.example.devwebtalk.repository.friend.FriendsGroupRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
