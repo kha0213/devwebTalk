@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Friend extends BaseEntity{
 	@Id
 	@GeneratedValue
-	@Column(name = "REALATION_ID")
+	@Column(name = "FRIEND_ID")
 	private Long id;
 
 	private String friendName;
