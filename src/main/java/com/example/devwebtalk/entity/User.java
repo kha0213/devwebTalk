@@ -20,7 +20,6 @@ import static javax.persistence.GenerationType.*;
  * Date: 2021-07-10
  * Time: 오후 3:29
  */
-
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
@@ -64,7 +63,7 @@ public class User extends BaseEntity {
      * 생성자 함수
      */
     public User(String name) {
-        this(name, null);
+        this.name = name;
     }
 
     public User(String name, LocalDateTime birthday) {
@@ -73,6 +72,11 @@ public class User extends BaseEntity {
 
     public User(String name, String email, LocalDateTime localDateTime) {
         this(name, null, email, localDateTime);
+    }
+
+    public User(String email, String pw) {
+        this.email = email;
+        this.pw = pw;
     }
 
     public User(String name, String phone, String email, LocalDateTime localDateTime) {
@@ -89,4 +93,5 @@ public class User extends BaseEntity {
         this.birthday = birthday;
         this.pw = pw;
     }
+
 }

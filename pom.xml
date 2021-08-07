@@ -66,6 +66,13 @@
             <version>1.4.200</version>
         </dependency>
 
+        <!-- validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+
         <!-- querydsl -->
         <dependency>
             <groupId>com.querydsl</groupId>

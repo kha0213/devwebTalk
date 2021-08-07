@@ -1,5 +1,6 @@
 package com.example.devwebtalk.controller;
 
+import com.example.devwebtalk.dto.UserCreateDto;
 import com.example.devwebtalk.entity.User;
 import com.example.devwebtalk.entity.type.SocialType;
 import com.example.devwebtalk.service.UserService;
@@ -8,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -46,14 +49,21 @@ public class UserController {
 
     @GetMapping(value = "/user/join")
     public String userJoinView(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserCreateDto());
         return "/user/join";
     }
 
     @PostMapping(value = "/user/join")
-    public String userJoin(@ModelAttribute User user
+    public String userJoin(@Validated @ModelAttribute("user") UserCreateDto user
+            , BindingResult bindingResult
             , RedirectAttributes redirectAttributes) {
-        Long userId = userService.join(user);
+
+        if (bindingResult.hasErrors()) {
+            log.info("[user join error] {}", bindingResult);
+            return "/user/join";
+        }
+
+        Long userId = userService.join(user.convertUser());
         redirectAttributes.addAttribute("userId", userId);
         // TODO 회원 가입 후 메인으로 가는게 좋을 듯
         return "redirect:/user/info";

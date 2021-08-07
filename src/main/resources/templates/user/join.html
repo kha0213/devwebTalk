@@ -44,31 +44,31 @@
                 <form name="addF" action="/user/join" method="post" th:object="${user}" class="needs-validation" novalidate>
                     <div class="col-12 mb-3">
                         <label for="email" class="form-label">이메일</label>
-                        <input type="email" class="form-control" id="email" th:field="*{email}" th:placeholder="'name@example.com'">
-                        <div class="invalid-feedback">
+                        <input type="email" class="form-control" id="email" th:field="*{email}" th:errorclass="is-invalid" th:placeholder="'name@example.com'">
+                        <div th:errorclass="invalid-feedback" th:errors="*{email}">
                             Please enter a valid email address for shipping updates.
                         </div>
                     </div>
                     <div class="col-12 mb-3">
-                        <label for="email-chk" class="form-label">이메일 확인</label>
-                        <input type="email" class="form-control" id="email-chk" th:placeholder="'you@example.com'">
-                        <div class="invalid-feedback">
+                        <label for="emailCheck" class="form-label">이메일 확인</label>
+                        <input type="email" class="form-control" id="emailCheck" th:field="*{emailCheck}" th:errorclass="is-invalid" th:placeholder="'you@example.com'">
+                        <div th:errorclass="invalid-feedback" th:errors="*{emailCheck}">
                             Please enter a valid email address for shipping updates.
                         </div>
                     </div>
 
                     <div class="col-12 mb-3">
-                        <label for="pwInput" class="form-label">비밀번호</label>
-                        <input type="password" class="form-control" th:name="pwInput" id="pwInput" th:placeholder="'******'" required>
-                        <div class="invalid-feedback">
+                        <label for="pw" class="form-label">비밀번호</label>
+                        <input type="password" class="form-control" th:errorclass="is-invalid" th:field="*{pw}" id="pw" th:placeholder="'******'" required>
+                        <div th:errorclass="invalid-feedback" th:errors="*{pw}">
                             Please your password.
                         </div>
                     </div>
 
                     <div class="col-12 mb-3">
-                        <label for="pwInputChk" class="form-label">비밀번호 확인</label>
-                        <input type="password" class="form-control" th:name="pwInputChk" id="pwInputChk" th:placeholder="'******'" required>
-                        <div class="invalid-feedback">
+                        <label for="pwCheck" class="form-label">비밀번호 확인</label>
+                        <input type="password" class="form-control" th:errorclass="is-invalid" th:field="*{pwCheck}" id="pwCheck" th:placeholder="'******'" required>
+                        <div th:errorclass="invalid-feedback" th:errors="*{pwCheck}">
                             Please your password.
                         </div>
                     </div>

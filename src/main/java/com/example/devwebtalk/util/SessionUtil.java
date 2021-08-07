@@ -1,6 +1,5 @@
 package com.example.devwebtalk.util;
 
-import com.example.devwebtalk.dto.UserDto;
 import com.example.devwebtalk.vo.LoginVO;
 import lombok.extern.slf4j.Slf4j;
 
