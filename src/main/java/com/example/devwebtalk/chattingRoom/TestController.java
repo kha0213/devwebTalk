@@ -28,7 +28,7 @@ public class TestController {
     ChatService chatService;
     @Autowired
     ChattingRoomService roomService;
-    
+
     @GetMapping("chatTest")
     public String chatTest() {
         return "chat/chatInclude";

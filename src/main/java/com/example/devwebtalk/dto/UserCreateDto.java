@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.ScriptAssert;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
@@ -28,18 +29,18 @@ import javax.validation.constraints.Pattern;
 		message = "비밀번호가 일치 하지 않습니다.")
 public class UserCreateDto {
 
-	@NotEmpty
+	@NotBlank
 	@Email
 	private String email;
 
-	@NotEmpty
+	@NotBlank
 	@Email
 	private String emailCheck;
 
 	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{6,20}$", message = "비밀 번호는 6~20자리로 숫자와 특수 문자가 포함된 영문 대소문자로 입력해 주세요")
 	private String pw;
 
-	@NotEmpty
+	@NotBlank
 	private String pwCheck;
 
 	public User convertUser() {
