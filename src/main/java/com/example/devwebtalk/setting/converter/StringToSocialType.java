@@ -1,10 +1,8 @@
-package com.example.devwebtalk.converter;
+package com.example.devwebtalk.setting.converter;
 
 import com.example.devwebtalk.entity.type.SocialType;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
-
-import java.util.Locale;
 
 /**
  * String을 Enum으로 변환해주는 converter

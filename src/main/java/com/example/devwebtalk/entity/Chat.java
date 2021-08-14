@@ -32,9 +32,6 @@ public class Chat extends BaseEntity {
 
     private String content;
 
-    @Enumerated
-    private ChatType type;
-
     @ManyToOne(fetch = LAZY)
     private User user;
 
@@ -45,7 +42,6 @@ public class Chat extends BaseEntity {
      * 생성자 함수
      */
     public Chat(String content, User user, ChattingRoom room) {
-        this.type = ChatType.MESSAGE;
         this.content = content;
         this.user = user;
         this.room = room;

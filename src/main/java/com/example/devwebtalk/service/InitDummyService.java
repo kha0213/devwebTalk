@@ -33,8 +33,11 @@ public class InitDummyService {
 	@Transactional
 	public void init() {
 		User userA = new User("userA","a@devweb.com", LocalDateTime.now());
+		userA.setPw("123qwe!");
 		User userB = new User("userB","b@devweb.com", LocalDateTime.now());
+		userB.setPw("123qwe!");
 		User userC = new User("userC","c@devweb.com", LocalDateTime.now());
+		userC.setPw("123qwe!");
 		userRepository.save(userA);
 		userRepository.save(userB);
 		userRepository.save(userC);

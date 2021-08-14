@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+	<h2>개발용 5xx 에러화면 </h2>
+	<div class="errorPage"><span class="errorHead">5xx Error!</span><br/>
+		<p th:text="${'path: ' + path}"></p>
+		<p th:text="${'status: ' + status}"></p>
+		<p th:text="${'timestamp: ' + timestamp}"></p>
+		<p th:text="${'error: ' + error}"></p>
+		<p th:text="${'errors: ' + errors}"></p>
+		<p th:text="${'exception: ' + exception}"></p>
+		<p th:text="${'message: ' + message}"></p>
+		<p th:text="${'trace: ' + trace}"></p>
+	</div>
+</body>
+</body>
+</html>

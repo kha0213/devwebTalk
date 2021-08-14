@@ -26,15 +26,6 @@ public class HomeController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/test")
-    public String UserTest(Model model) {
-        User user = new User("영롱");
-        final Long userAdd = userService.join(user);
-        logger.info("userAdd !! user : " + user);
-        model.addAttribute("user", user);
-        return "testUser";
-    }
-
     @GetMapping(value = "/login")
     public String Login() {
         return "/user/login";

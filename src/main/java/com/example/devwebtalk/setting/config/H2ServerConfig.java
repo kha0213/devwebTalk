@@ -1,4 +1,4 @@
-package com.example.devwebtalk.config;
+package com.example.devwebtalk.setting.config;
 
 /**
  * Created by Kim Young Long.

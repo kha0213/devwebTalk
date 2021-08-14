@@ -74,6 +74,12 @@
             <artifactId>querydsl-jpa</artifactId>
         </dependency>
 
+        <!-- 공통 -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.8.0</version>
+        </dependency>
 
         <!-- websocket 관련 start!-->
         <dependency>
@@ -111,18 +117,7 @@
     <build>
         <defaultGoal>install</defaultGoal>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
+
 
             <plugin>
                 <groupId>com.mysema.maven</groupId>

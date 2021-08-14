@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-12 mb-3">
                         <label for="emailCheck" class="form-label">이메일 확인</label>
-                        <input type="email" class="form-control" id="emailCheck" th:field="*{emailCheck}" th:errorclass="is-invalid" th:placeholder="'you@example.com'">
+                        <input type="password" class="form-control" id="emailCheck" th:field="*{emailCheck}" th:errorclass="is-invalid" th:placeholder="'you@example.com'">
                         <div th:errorclass="invalid-feedback" th:errors="*{emailCheck}">
                             Please enter a valid email address for shipping updates.
                         </div>

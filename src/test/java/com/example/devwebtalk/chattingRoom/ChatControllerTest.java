@@ -1,6 +1,7 @@
 package com.example.devwebtalk.chattingRoom;
 
 import com.example.devwebtalk.dto.ChatDto;
+import com.example.devwebtalk.dto.ChatMessageDto;
 import com.example.devwebtalk.entity.Chat;
 import com.example.devwebtalk.entity.ChattingRoom;
 import com.example.devwebtalk.entity.User;
@@ -98,12 +99,12 @@ class ChatControllerTest {
                 session.subscribe("/topic/receiveMsg", new StompFrameHandler() {
                     @Override
                     public Type getPayloadType(StompHeaders headers) {
-                        return ChatDto.class;
+                        return ChatMessageDto.class;
                     }
 
                     @Override
                     public void handleFrame(StompHeaders headers, Object payload) {
-                        ChatDto chat = (ChatDto) payload;
+                        ChatMessageDto chat = (ChatMessageDto) payload;
                         try {
                             assertEquals("Hello, Spring!", chat.getContent());
                         } catch (Throwable t) {

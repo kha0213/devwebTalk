@@ -1,4 +1,4 @@
-package com.example.devwebtalk.constant;
+package com.example.devwebtalk.setting.constant;
 
 /**
  * 2021-07-21

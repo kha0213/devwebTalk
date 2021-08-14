@@ -1,4 +1,4 @@
-package com.example.devwebtalk.config;
+package com.example.devwebtalk.setting.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

@@ -39,7 +39,7 @@ public class ChatController {
     @MessageMapping("/sendMsg")
     @SendTo("/topic/receiveMsg")
     public ChatDto sendMessage(ChatMessageDto message) {
-        log.info("sendMessage : {}", message.getContent());
+        log.debug("sendMessage : {}", message.getContent());
         // 유저 ID로 유저 이름 세팅
         Optional<User> user = userService.findById(message.getUserId());
         message.setUserName(user.orElseThrow().getName());

@@ -1,4 +1,4 @@
-package com.example.devwebtalk.util;
+package com.example.devwebtalk.setting.util;
 
 import com.example.devwebtalk.vo.LoginVO;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +28,16 @@ public class SessionUtil {
         return getLoginVO(req) == null;
     }
 
+    /**
+     * 로그인 여부 확인하기 (true면 login)
+     * @author kyl
+     * @param req
+     * @return
+     */
+    public static boolean isLoginUser(HttpServletRequest req) {
+        return getLoginVO(req) != null;
+    }
+
 
     /**
      * loginVO 가져오기 (session에 user로 저장)
@@ -49,14 +59,9 @@ public class SessionUtil {
      * @return Object
      */
     public static Object getSessionValue(HttpServletRequest req, String value) {
-        HttpSession session = req.getSession();
-        Object result = null;
-        try {
-            result = session.getAttribute(value);
-        } catch (NullPointerException exception) {
-            log.error("session is null");
-        }
-        return result;
+        HttpSession session = req.getSession(false);
+        if(session == null) return null;
+        return session.getAttribute(value);
     }
 
     /**
@@ -68,7 +73,7 @@ public class SessionUtil {
      * @return String
      */
     public static String getSessionStringValue(HttpServletRequest req, String value, String defaultValue) {
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(false);
         Object result = getSessionValue(req, value);
         if( result == null ) {
             return defaultValue;
