@@ -1,8 +1,12 @@
 package com.example.devwebtalk.controller;
 
+import com.example.devwebtalk.vo.FileDownloadVO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 파일 처리 관련 컨트롤러
@@ -16,12 +20,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FileController {
 
     @GetMapping("/download.do")
-    public String download() {
+    public String downloadView() {
+        return "/file/download";
+    }
+
+    @PostMapping("/download.do")
+    public @ResponseBody ResponseEntity<?> download(FileDownloadVO fileDownloadVO) {
         return null;
     }
 
     @GetMapping("/upload.do")
-    public String upload() {
+    public @ResponseBody String upload() {
         return null;
     }
 }

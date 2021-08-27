@@ -21,13 +21,14 @@ class DevwebTalkApplicationTests {
     // query dsl 작동 테스트
     @Test
     void contextLoads() {
-        User user = new User();
+        User user = new User("TEST_USER_1");
         em.persist(user);
 
         JPAQueryFactory query = new JPAQueryFactory(em);
         QUser qUser = QUser.user;
         User result = query
                 .selectFrom(qUser)
+                .where(qUser.name.eq("TEST_USER_1"))
                 .fetchOne();
 
         Assertions.assertThat(result).isEqualTo(user);

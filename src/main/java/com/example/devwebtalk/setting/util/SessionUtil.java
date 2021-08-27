@@ -1,10 +1,14 @@
 package com.example.devwebtalk.setting.util;
 
+import com.example.devwebtalk.setting.constant.Cons;
 import com.example.devwebtalk.vo.LoginVO;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 /**
  * 세션과 관련된 유틸 클래스
@@ -84,6 +88,12 @@ public class SessionUtil {
 
     public static String getSessionStringValue(HttpServletRequest req, String value) {
         return getSessionStringValue(req, value, null);
+    }
+
+    public static void setSessionValue(HttpServletRequest req, String key, Object value) {
+        final HttpSession session = req.getSession(false);
+        if( session == null ) return;
+        session.setAttribute(key, value);
     }
 
 }

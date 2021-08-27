@@ -27,7 +27,7 @@ class FriendDtoServiceTest {
 	@Test
 	void getAllFriendList() {
 		Optional<User> userA = userRepository.findByEmail("a@devweb.com");
-		List<FriendDto> allFriendList = new ArrayList<FriendDto>();
+		List<FriendDto> allFriendList = new ArrayList<>();
 		if(userA.isPresent()){
 			allFriendList = friendDtoService.getAllFriendList(userA.get());
 		}

@@ -112,6 +112,13 @@
             <version>3.1.1-1</version>
         </dependency>
         <!-- websocket 관련 end!-->
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-crypto -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-crypto</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

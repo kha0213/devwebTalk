@@ -1,6 +1,7 @@
 package com.example.devwebtalk.entity;
 
 import com.example.devwebtalk.entity.type.SocialType;
+import com.example.devwebtalk.setting.converter.CryptoConverter;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,16 +38,18 @@ public class User extends BaseEntity {
     private Long id;
 
     private String phone;
-
+    @Column(unique = true)
+    @Convert(converter = CryptoConverter.class)
     private String email;
 
     private String name;
 
     private LocalDateTime birthday;
-
+    @Convert(converter = CryptoConverter.class)
     private String pw;
 
     @OneToMany(mappedBy = "user")
+    @Enumerated(value = EnumType.STRING)
     @MapKeyEnumerated(value = STRING)
     @ToString.Exclude
     private Map<SocialType, SocialLogin> socials = new HashMap<>();
