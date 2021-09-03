@@ -39,6 +39,7 @@ public class SocialLogin extends BaseEntity {
 
     @ToString.Exclude
     @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "USER_ID")
     private User user;
 
     //생성자

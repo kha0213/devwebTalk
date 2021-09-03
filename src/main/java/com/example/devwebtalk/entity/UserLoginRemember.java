@@ -29,12 +29,16 @@ public class UserLoginRemember extends BaseEntity {
 
     private String cookieValue;
 
-    @OneToOne(orphanRemoval = true, cascade = ALL)
+    @OneToOne
     @JoinColumn(name = "USER_ID")
     private User user;
+
+    @Transient
+    private boolean isNew;
 
     public UserLoginRemember(String cookieValue, User user) {
         this.cookieValue = cookieValue;
         this.user = user;
+        this.isNew = true;
     }
 }

@@ -24,11 +24,13 @@ public class SEEDUtil {
     private static final byte[] pbszIV = "1234567890123456".getBytes();
 
     public static String encrypt(String rawMessage) {
+        if(rawMessage == null) return null;
         byte[] message = rawMessage.getBytes(UTF_8);
         byte[] encryptedMessage = KISA_SEED_CBC.SEED_CBC_Encrypt(pbszUserKey, pbszIV, message, 0, message.length);
         return new String(Base64.getEncoder().encode(encryptedMessage), UTF_8);
     }
     public static String decrypt(String encryptedMessage) {
+        if(encryptedMessage == null) return null;
         byte[] message = Base64.getDecoder().decode(encryptedMessage);
         byte[] decryptedMessage = KISA_SEED_CBC.SEED_CBC_Decrypt(pbszUserKey, pbszIV, message, 0, message.length);
         return new String(decryptedMessage, UTF_8);

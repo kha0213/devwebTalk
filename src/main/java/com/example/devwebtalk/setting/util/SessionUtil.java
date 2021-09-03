@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+import static com.example.devwebtalk.setting.constant.Cons.LOGIN_VO;
+
 /**
  * 세션과 관련된 유틸 클래스
  * 2021-07-26
@@ -19,9 +21,6 @@ import java.util.Optional;
  */
 @Slf4j
 public class SessionUtil {
-
-    private static final String loginVO = "loginVO";
-
     /**
      * 로그인 여부 확인하기 (true면 guest)
      * @author kyl
@@ -44,13 +43,13 @@ public class SessionUtil {
 
 
     /**
-     * loginVO 가져오기 (session에 user로 저장)
+     * loginVO 가져오기
      * @author kyl
      * @param req
      * @return LoginVO
      */
     public static LoginVO getLoginVO(HttpServletRequest req) {
-        Object result = getSessionValue(req, loginVO);
+        Object result = getSessionValue(req, LOGIN_VO);
         if(result instanceof LoginVO) return (LoginVO) result;
         else return null;
     }

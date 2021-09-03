@@ -1,6 +1,7 @@
 package com.example.devwebtalk.service;
 
 import com.example.devwebtalk.dto.UserCreateDto;
+import com.example.devwebtalk.dto.UserModifyDto;
 import com.example.devwebtalk.entity.User;
 import com.example.devwebtalk.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -92,5 +93,19 @@ class UserServiceTest {
 
 		//then
 		assertThat(user).isEqualTo(findUser);
+	}
+
+	@Test
+	@DisplayName("이메일로 UserModifyDto 반환 테스트")
+	void findUserModifyDtoByEmailTest() {
+		//given
+		User dbUser = new User("user1","010-2017-4444","jeenpark@naver.com",null, "4444");
+
+		//when
+		UserModifyDto modifyDto = userService.findUserModifyDtoByEmail("jeenpark@naver.com");
+
+		//then
+		assertThat(modifyDto.getName()).isEqualTo(dbUser.getName());
+		assertThat(modifyDto.getPhone()).isEqualTo(dbUser.getPhone());
 	}
 }

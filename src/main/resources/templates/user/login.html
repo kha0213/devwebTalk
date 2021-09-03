@@ -39,8 +39,15 @@
 
 <div class="container text-center">
 	<main>
+		<div class="pt-5 text-right">
+			<span class="text-right">
+				<a class="btn-lg btn-secondary float-end text-decoration-none" th:text="회원가입" th:href="@{/user/join}"></a>
+			</span>
+		</div>
 		<div class="p-5 text-center">
-			<h2>로그인</h2>
+			<h2>
+				로그인
+			</h2>
 		</div>
 
 	<form method="post" th:object="${user}">

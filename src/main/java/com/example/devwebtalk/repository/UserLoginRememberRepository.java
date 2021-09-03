@@ -17,4 +17,8 @@ import java.util.Optional;
 public interface UserLoginRememberRepository extends JpaRepository<UserLoginRemember, Long> {
     @Query(value = "select u.user from UserLoginRemember as u where u.cookieValue = :cookieValue")
     Optional<User> findByCookieValue(@Param("cookieValue") String cookieValue);
+
+    Optional<UserLoginRemember> findUserLoginRememberByCookieValue(@Param("cookieValue") String cookieValue);
+
+    void deleteByCookieValue(@Param("cookieValue") String cookieValue);
 }

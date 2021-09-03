@@ -35,4 +35,9 @@ public class CookieUtil {
         res.addCookie(cookie);
     }
 
+    public static void deleteCookie(HttpServletResponse res, String cookieName) {
+        Cookie cookie = new Cookie(cookieName, null);
+        cookie.setMaxAge(0);
+        res.addCookie(cookie);
+    }
 }

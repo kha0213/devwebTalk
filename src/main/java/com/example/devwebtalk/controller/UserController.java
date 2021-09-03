@@ -2,11 +2,11 @@ package com.example.devwebtalk.controller;
 
 import com.example.devwebtalk.dto.UserCreateDto;
 import com.example.devwebtalk.dto.UserLoginDto;
+import com.example.devwebtalk.dto.UserModifyDto;
 import com.example.devwebtalk.entity.type.SocialType;
 import com.example.devwebtalk.service.UserLoginRememberService;
 import com.example.devwebtalk.service.UserService;
 import com.example.devwebtalk.setting.annotation.Login;
-import com.example.devwebtalk.setting.constant.Cons;
 import com.example.devwebtalk.setting.util.CookieUtil;
 import com.example.devwebtalk.setting.util.SEEDUtil;
 import com.example.devwebtalk.setting.util.SessionUtil;
@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +24,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.util.Optional;
 
 import static com.example.devwebtalk.setting.constant.Cons.*;
 
@@ -57,14 +58,13 @@ public class UserController {
             , HttpServletRequest req
             , @RequestParam(defaultValue = "redirect:friendList") String redirectURL
             , @CookieValue(value= LOGIN_COOKIE, required=false) Cookie loginCookie) {
-        //TODO 로그인 체크 되어 있으면 로그인 바로 되게 적용
-//        if (userLoginRememberService.isValidLoginCookie(loginCookie)) {
-//                UserLoginDto userLoginDto = userLoginRememberService.findLoginDtoByCookieValue(loginCookie.getValue());
-//            if (userLoginDto != null) {
-//                setLoginVOInSession(req, userLoginDto);
-//                return redirectURL;
-//            }
-//        }
+        if (userLoginRememberService.isValidLoginCookie(loginCookie)) {
+                UserLoginDto userLoginDto = userLoginRememberService.findLoginDtoByCookieValue(loginCookie.getValue());
+            if (userLoginDto != null) {
+                setLoginVOInSession(req, userLoginDto);
+                return redirectURL;
+            }
+        }
         model.addAttribute("user", new UserLoginDto());
         return "user/login";
     }
@@ -88,7 +88,6 @@ public class UserController {
         }
 
         setLoginVOInSession(req, userLoginDto);
-
         if (userLoginDto.isRememberLogin()) {
             saveRememberLogin(res, userLoginDto);
         }
@@ -126,10 +125,17 @@ public class UserController {
     }
 
     @GetMapping(value = "/info")
-    public String userInfoView(@Login LoginVO loginVO, HttpServletRequest req) {
-        // loginVO == SessionUtil.getLoginVO(req);
-
+    public String userInfoView(@Login LoginVO loginVO, Model model) {
+        UserModifyDto user = userService.findUserModifyDtoByEmail(loginVO.getEmail());
+        model.addAttribute("user", user);
         return "user/info";
     }
 
+    @GetMapping(value = "/logout")
+    public String logout(@Login LoginVO loginVO, HttpSession session, HttpServletResponse res) {
+        userLoginRememberService.remove(loginVO);
+        CookieUtil.deleteCookie(res, LOGIN_COOKIE);
+        session.removeAttribute(LOGIN_VO);
+        return "redirect:login";
+    }
 }

@@ -1,5 +1,7 @@
 package com.example.devwebtalk.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -20,6 +22,7 @@ import java.time.LocalDateTime;
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@Getter @Setter
 public abstract class BaseEntity {
     @CreatedDate
     private LocalDateTime createdDate;

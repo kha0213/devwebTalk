@@ -1,6 +1,7 @@
 package com.example.devwebtalk.service;
 
 import com.example.devwebtalk.dto.UserLoginDto;
+import com.example.devwebtalk.dto.UserModifyDto;
 import com.example.devwebtalk.entity.User;
 import com.example.devwebtalk.repository.UserLoginRememberRepository;
 import com.example.devwebtalk.repository.UserRepository;
@@ -74,4 +75,7 @@ public class UserService {
         return existUser;
     }
 
+    public UserModifyDto findUserModifyDtoByEmail(String email) {
+        return userRepository.findUserModifyDtoByEmail(email);
+    }
 }
