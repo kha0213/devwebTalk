@@ -5,6 +5,9 @@ import com.example.devwebtalk.entity.User;
 import com.example.devwebtalk.entity.type.SocialType;
 import lombok.*;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
